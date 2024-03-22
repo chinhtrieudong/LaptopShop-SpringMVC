@@ -16,7 +16,6 @@
 
         <body>
             <h1>hello jsp</h1>
-            <h2>${eric}</h2>
             <h3>${Chinh}</h3>
             <button class="btn btn-success">Submit</button>
         </body>
