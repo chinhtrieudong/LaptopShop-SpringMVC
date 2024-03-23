@@ -11,7 +11,7 @@
                 <!-- Latest compiled JavaScript -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-                <title>Document</title>
+                <title>User list</title>
                 <!-- <link rel="stylesheet" href="/css/style.css"> -->
             </head>
 
@@ -49,9 +49,10 @@
                                         <td>${user.password}</td>
                                         <td>${user.phone}</td>
                                         <td>
-                                            <btn class="btn btn-success">View</btn>
-                                            <btn class="btn btn-warning">Update</btn>
-                                            <btn class="btn btn-danger">Delete</btn>
+                                            <a href="/admin/user/${user.id}" class="btn btn-success">View</a>
+                                            <a href="/admin/user/update/${user.id}" class="btn btn-warning">Update</a>
+                                            <a href="/admin/user/deleteByUserId/${user.id}"
+                                                class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
