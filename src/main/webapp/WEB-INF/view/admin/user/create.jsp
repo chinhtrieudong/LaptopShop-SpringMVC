@@ -19,7 +19,7 @@
                 <div class="container mt-3">
                     <div class="row">
                         <div class="col-md-6 col-12 align-items-center mx-auto">
-                            <form:form method="post" action="/admin/user/create1" modelAttribute="newUser">
+                            <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
                                 <h1 class="border border-0 border-bottom-1">Create a user</h1>
                                 <hr>
                                 <div class="mb-3 mt-3">
