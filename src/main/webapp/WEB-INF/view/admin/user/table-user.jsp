@@ -16,6 +16,7 @@
             </head>
 
             <body>
+                <!-- <h1>${users}</h1> -->
                 <div class="container mt-3">
                     <div class="row">
 
@@ -30,44 +31,30 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
+                                    <th scope="col">Address</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Full name</th>
+                                    <th scope="col">Password</th>
+                                    <th scope="col">Phone</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>qwewq</td>
-                                    <td>Otto</td>
-                                    <td>
-                                        <btn class="btn btn-success">View</btn>
-                                        <btn class="btn btn-warning">Update</btn>
-                                        <btn class="btn btn-danger">Delete</btn>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>qew</td>
-                                    <td>Thornton</td>
-                                    <td>
-                                        <btn class="btn btn-success">View</btn>
-                                        <btn class="btn btn-warning">Update</btn>
-                                        <btn class="btn btn-danger">Delete</btn>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>
-                                        qweqwe
-                                    </td>
-                                    <td>the Bird</td>
-                                    <td>
-                                        <btn class="btn btn-success">View</btn>
-                                        <btn class="btn btn-warning">Update</btn>
-                                        <btn class="btn btn-danger">Delete</btn>
-                                    </td>
-                                </tr>
+                                <c:forEach var="user" items="${users}">
+                                    <tr>
+                                        <th scope="row">${user.id}</th>
+                                        <th scope="row">${user.address}</th>
+                                        <td>${user.email}</td>
+                                        <td>${user.fullName}</td>
+                                        <td>${user.password}</td>
+                                        <td>${user.phone}</td>
+                                        <td>
+                                            <btn class="btn btn-success">View</btn>
+                                            <btn class="btn btn-warning">Update</btn>
+                                            <btn class="btn btn-danger">Delete</btn>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
