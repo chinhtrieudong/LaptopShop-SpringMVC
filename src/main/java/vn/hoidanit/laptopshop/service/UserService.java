@@ -26,11 +26,11 @@ public class UserService {
         return this.userRepository.findByEmail(email);
     }
 
-    public User getUserById(long userId) {
-        return this.userRepository.findUserById(userId);
+    public User getUserById(long id) {
+        return this.userRepository.findUserById(id);
     }
 
-    public void deleteUserById(long userId) {
-        this.userRepository.deleteById(userId);
+    public void deleteAUser(long id) {
+        this.userRepository.deleteById(id);
     }
 }
