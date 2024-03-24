@@ -20,16 +20,20 @@
                     <div class="row">
                         <div class="col-md-6 col-12 align-items-center mx-auto">
                             <form:form method="post" action="/admin/user/update" modelAttribute="updateUser">
-                                <h1 class="border border-0 border-bottom-1">Update user ${id}</h1>
+                                <h1 class="border border-0 border-bottom-1">Update user with id = ${id}</h1>
                                 <hr>
-                                <div class="mb-3 mt-3">
-                                    <label for="email" class="form-label">Email:</label>
-                                    <form:input type="email" class="form-control" path="email" />
-                                </div>
-                                <div class="mb-3">
+                                <div class="mb-3 d-none ">
                                     <label class="form-label">Id:</label>
                                     <form:input type="text" class="form-control" path="id" />
                                 </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="email" class="form-label">Email:</label>
+                                    <form:input type="email" class="form-control" path="email" disabled="true" />
+                                </div>
+                                <!-- <div class="mb-3 mt-3">
+                                    <label for="email" class="form-label">Password:</label>
+                                    <form:input type="text" class="form-control" path="password" />
+                                </div> -->
                                 <div class="mb-3">
                                     <label class="form-label">Phone number:</label>
                                     <form:input type="text" class="form-control" path="phone" />

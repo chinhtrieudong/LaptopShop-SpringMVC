@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
@@ -66,15 +68,25 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
+    // Update user page
     @RequestMapping("/admin/user/update/{id}")
-    public String getUpdateUserPage(Model model) {
-        model.addAttribute("updateUser", new User());
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User curUser = this.userService.getUserById(id);
+        model.addAttribute("updateUser", curUser);
         return "/admin/user/update";
     }
 
-    @RequestMapping(value = "/admin/user/update", method = RequestMethod.POST)
-    public String updateUserPage(Model model, @ModelAttribute("newUser") User hoidanit) {
-        System.out.println(hoidanit);
+    // Update user
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User hoidanit) {
+        User curUser = this.userService.getUserById(hoidanit.getId());
+        if (curUser != null) {
+            curUser.setFullName(hoidanit.getFullName());
+            curUser.setPhone(hoidanit.getPhone());
+            curUser.setAddress(hoidanit.getAddress());
+
+            this.userService.handleSaveUser(curUser); // auto update when exist.
+        }
         return "redirect:/admin/user";
     }
 
