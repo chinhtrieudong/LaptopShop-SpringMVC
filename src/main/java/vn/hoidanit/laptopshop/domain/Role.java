@@ -1,10 +1,11 @@
 package vn.hoidanit.laptopshop.domain;
 
-import jakarta.annotation.Generated;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +17,10 @@ public class Role {
     private long id;
     private String name;
     private String description;
+
+    // One role => many User Crt k s
+    @OneToMany(mappedBy = "role")
+    private List<User> users;
 
     public Role(long id, String name, String description) {
         this.id = id;
