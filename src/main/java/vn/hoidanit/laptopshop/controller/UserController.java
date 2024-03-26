@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
@@ -86,7 +84,7 @@ public class UserController {
 
     // Remove user page
     @GetMapping("/admin/user/delete/{id}")
-    public String requestMethodName(Model model, @PathVariable long id) {
+    public String getDeleteUserPage(Model model, @PathVariable long id) {
         model.addAttribute("id", id);
         User user = new User();
         user.setId(id);
@@ -96,7 +94,7 @@ public class UserController {
 
     // Remove user
     @PostMapping("/admin/user/delete")
-    public String removeUserById(Model model, @ModelAttribute("newUser") User hoidanit) {
+    public String postDeleteUser(Model model, @ModelAttribute("newUser") User hoidanit) {
         this.userService.deleteAUser(hoidanit.getId());
         return "redirect:/admin/user";
     }
