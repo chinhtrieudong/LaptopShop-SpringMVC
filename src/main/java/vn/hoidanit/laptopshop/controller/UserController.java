@@ -64,7 +64,7 @@ public class UserController {
     @RequestMapping("/admin/user/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable long id) {
         User curUser = this.userService.getUserById(id);
-        model.addAttribute("updateUser", curUser);
+        model.addAttribute("newUser", curUser);
         return "/admin/user/update";
     }
 

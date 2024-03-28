@@ -19,7 +19,7 @@
                 <div class="container mt-3">
                     <div class="row">
                         <div class="col-md-6 col-12 align-items-center mx-auto">
-                            <form:form method="post" action="/admin/user/update" modelAttribute="updateUser">
+                            <form:form method="post" action="/admin/user/update" modelAttribute="newUser">
                                 <h1 class="border border-0 border-bottom-1">Update user with id = ${id}</h1>
                                 <hr>
                                 <div class="mb-3 d-none ">
