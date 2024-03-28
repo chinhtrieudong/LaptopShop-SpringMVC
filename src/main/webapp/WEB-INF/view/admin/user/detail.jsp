@@ -22,12 +22,33 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manage Products</h1>
+                                <h1 class="mt-4">Manage Users</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item ">Dashboard</li>
-                                    <li class="breadcrumb-item active">Products</li>
+                                    <li class="breadcrumb-item active">User detail</li>
                                 </ol>
-                                <h1>table product</h1>
+                                <div class="mt-5">
+                                    <div class="row ml-0">
+                                        <div class="d-flex justify-content-between mt-5 ">
+                                            <h3>User detail with id = ${userInfo.id}</h3>
+                                        </div>
+
+                                        <div class="card  " style="width: 60%;">
+                                            <div class="card-header">
+                                                <h4> User infomation</h4>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">ID: ${userInfo.id}</li>
+                                                <li class="list-group-item">Address: ${userInfo.address}</li>
+                                                <li class="list-group-item">Email: ${userInfo.email}</li>
+                                                <li class="list-group-item">Phone number: ${userInfo.phone}</li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+                                    <a href="/admin/user" class="btn btn-success mt-3 ">Back</a>
+                                </div>
                             </div>
                         </main>
                         <jsp:include page="../layout/footer.jsp" />
@@ -40,4 +61,4 @@
 
             </body>
 
-            </html>z
+            </html>

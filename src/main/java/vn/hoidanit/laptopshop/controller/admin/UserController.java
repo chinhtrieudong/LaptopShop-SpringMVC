@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop.controller;
+package vn.hoidanit.laptopshop.controller.admin;
 
 import org.springframework.ui.Model;
 import vn.hoidanit.laptopshop.domain.User;
@@ -34,7 +34,7 @@ public class UserController {
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     // Get user by Id
@@ -43,7 +43,7 @@ public class UserController {
         model.addAttribute("newUser", new User());
         User userInfo = this.userService.getUserById(id);
         model.addAttribute("userInfo", userInfo);
-        return "admin/user/user-detail";
+        return "admin/user/detail";
     }
 
     // Create user Page
