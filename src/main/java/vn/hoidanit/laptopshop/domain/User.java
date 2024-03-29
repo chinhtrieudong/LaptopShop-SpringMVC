@@ -30,10 +30,15 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    // One User => many role
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
-    public User(long id, String email, String password, String fullName, String address, String phone, String avatar) {
+    public User() {
+    }
+
+    public User(long id, String email, String password, String fullName, String address, String phone, String avatar,
+            Role role, List<Order> orders) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -41,10 +46,32 @@ public class User {
         this.address = address;
         this.phone = phone;
         this.avatar = avatar;
+        this.role = role;
+        this.orders = orders;
     }
 
-    public User() {
-        // TODO Auto-generated constructor stub
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public long getId() {
