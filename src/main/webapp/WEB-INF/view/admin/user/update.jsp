@@ -24,39 +24,64 @@
                             <div class="container-fluid px-4">
                                 <h1 class="mt-4">Manage Users</h1>
                                 <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb-item">Dashboard</li>
+                                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                                     <li class="breadcrumb-item active">Update user</li>
                                 </ol>
                                 <div class="mt-5">
                                     <div class="row">
                                         <div class="col-md-6 col-12 align-items-center mx-auto">
-                                            <form:form method="post" action="/admin/user/update"
-                                                modelAttribute="newUser">
+                                            <form:form class="row" method="post" action="/admin/user/update"
+                                                modelAttribute="newUser" enctype="multipart/form-data">
                                                 <h1 class="border border-0 border-bottom-1">Update user with id = ${id}
                                                 </h1>
                                                 <hr>
-                                                <div class="mb-3 d-none ">
+
+                                                <div class="mb-3 col-12  d-none ">
                                                     <label class="form-label">Id:</label>
                                                     <form:input type="text" class="form-control" path="id" />
                                                 </div>
-                                                <div class="mb-3 mt-3">
+                                                <div class="mb-3 col-12 col-md-6 mt-3">
                                                     <label for="email" class="form-label">Email:</label>
                                                     <form:input type="email" class="form-control" path="email"
                                                         disabled="true" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6 mt-3">
                                                     <label class="form-label">Phone number:</label>
                                                     <form:input type="text" class="form-control" path="phone" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Full name:</label>
                                                     <form:input type="text" class="form-control" path="fullName" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Address:</label>
                                                     <form:input type="text" class="form-control" path="address" />
                                                 </div>
-                                                <button type="submit" class="btn btn-warning ">Submit</button>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Role:
+                                                    </label>
+                                                    <form:select class="form-select" path="role.name">
+                                                        <form:option value="ADMIN">ADMIN</form:option>
+                                                        <form:option value="USER">USER</form:option>
+                                                    </form:select>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Avatar:
+                                                    </label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".png, .jpg, .jpeg" name="hoidanitFile">
+                                                </div>
+
+                                                <div class="col-12 mb-3 ">
+                                                    <img src="" style="max-height: 250px; display: none;"
+                                                        alt="avatar preview" id="avatarPreview">
+                                                </div>
+                                                <div class="col-12 mb-5 ">
+                                                    <button type="submit " class="btn btn-warning  ">Submit</button>
+                                                </div>
+
                                             </form:form>
                                         </div>
                                     </div>

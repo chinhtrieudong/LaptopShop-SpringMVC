@@ -24,7 +24,7 @@
                             <div class="container-fluid px-4">
                                 <h1 class="mt-4">Manage Users</h1>
                                 <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb-item ">Dashboard</li>
+                                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                                     <li class="breadcrumb-item active">User detail</li>
                                 </ol>
                                 <div class="mt-5">
@@ -39,8 +39,9 @@
                                             </div>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">ID: ${userInfo.id}</li>
-                                                <li class="list-group-item">Address: ${userInfo.address}</li>
                                                 <li class="list-group-item">Email: ${userInfo.email}</li>
+                                                <li class="list-group-item">Role: ${userInfo.role.name}</li>
+                                                <li class="list-group-item">Address: ${userInfo.address}</li>
                                                 <li class="list-group-item">Phone number: ${userInfo.phone}</li>
                                             </ul>
                                         </div>

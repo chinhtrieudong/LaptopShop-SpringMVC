@@ -24,7 +24,7 @@
                             <div class="container-fluid px-4">
                                 <h1 class="mt-4">Manage Users</h1>
                                 <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb-item ">Dashboard</li>
+                                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                                     <li class="breadcrumb-item active">Users</li>
                                 </ol>
                                 <div class="mt-5">
@@ -41,11 +41,11 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">ID</th>
-                                                    <th scope="col">Address</th>
+                                                    <!-- <th scope="col">Address</th> -->
                                                     <th scope="col">Email</th>
                                                     <th scope="col">Full name</th>
-                                                    <th scope="col">Password</th>
-                                                    <th scope="col">Phone</th>
+                                                    <!-- <th scope="col">Password</th> -->
+                                                    <th scope="col">Role</th>
                                                     <th scope="col">Actions</th>
                                                 </tr>
                                             </thead>
@@ -53,11 +53,11 @@
                                                 <c:forEach var="user" items="${users}">
                                                     <tr>
                                                         <th scope="row">${user.id}</th>
-                                                        <th scope="row">${user.address}</th>
-                                                        <td>${user.email}</td>
+                                                        <th scope="row">${user.email}</th>
                                                         <td>${user.fullName}</td>
-                                                        <td>${user.password}</td>
-                                                        <td>${user.phone}</td>
+                                                        <td>${user.role.name}</td>
+                                                        <!-- <td class="overflow-x-auto">${user.password}</td> -->
+                                                        <!-- <td>${user.phone}</td> -->
                                                         <td>
                                                             <a href="/admin/user/${user.id}"
                                                                 class="btn btn-success">View</a>

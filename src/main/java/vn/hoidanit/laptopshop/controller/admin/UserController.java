@@ -2,6 +2,7 @@ package vn.hoidanit.laptopshop.controller.admin;
 
 import org.springframework.ui.Model;
 
+import vn.hoidanit.laptopshop.domain.Role;
 import vn.hoidanit.laptopshop.domain.User;
 
 import java.util.List;
@@ -89,14 +90,17 @@ public class UserController {
 
     // Update user
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model, @ModelAttribute("newUser") User hoidanit) {
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User hoidanit,
+            @RequestParam("hoidanitFile") MultipartFile file) {
         User curUser = this.userService.getUserById(hoidanit.getId());
+
         if (curUser != null) {
             curUser.setFullName(hoidanit.getFullName());
             curUser.setPhone(hoidanit.getPhone());
             curUser.setAddress(hoidanit.getAddress());
-
-            this.userService.handleSaveUser(curUser); // auto update when exist.
+            curUser.setAvatar(this.uploadService.handleSaveUploadFile(file, "avatar"));
+            curUser.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
+            this.userService.handleSaveUser(curUser);
         }
         return "redirect:/admin/user";
     }
