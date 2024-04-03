@@ -22,6 +22,9 @@ public class Product {
     private String factory;
     private String target;
 
+    public Product() {
+    }
+
     public Product(long id, String name, double price, String image, String detailDesc, String shortDesc, long quantity,
             long sold, String factory, String target) {
         this.id = id;
