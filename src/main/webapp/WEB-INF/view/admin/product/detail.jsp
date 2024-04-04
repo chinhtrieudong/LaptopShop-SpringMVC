@@ -29,11 +29,15 @@
                                 </ol>
                                 <div class="mt-5">
                                     <div class="row ml-0">
-                                        <div class="d-flex justify-content-between mt-5 ">
+                                        <div class="d-flex justify-content-between mt-5 mb-3 ">
                                             <h3>Product detail with id = ${productInfo.id}</h3>
                                         </div>
+                                        <hr>
 
-                                        <div class="card  " style="width: 60%;">
+                                        <div class="card" style="width: 60%;">
+                                            <img src="/images/product/${productInfo.image}" class="card-img-top"
+                                                alt="Card image cap">
+
                                             <div class="card-header">
                                                 <h4> Product infomation:</h4>
                                             </div>

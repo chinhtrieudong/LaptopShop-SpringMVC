@@ -48,7 +48,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="product" items="${hoidanit}">
+                                                <c:forEach var="product" items="${products}">
                                                     <tr>
                                                         <th scope="row">${product.id}</th>
                                                         <th scope="row">${product.name}</th>
