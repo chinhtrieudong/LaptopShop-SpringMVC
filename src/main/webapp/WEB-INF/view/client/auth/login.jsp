@@ -38,16 +38,9 @@
                                                             placeholder="Password" path="password" />
                                                         <label for="inputPassword">Password</label>
                                                     </div>
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" type="checkbox" value="" />
-                                                        <label class="form-check-label"
-                                                            for="inputRememberPassword">Remember Password</label>
-                                                    </div>
-                                                    <div
-                                                        class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                        <a class="small">Forgot Password?</a>
-                                                        <button class="btn btn-primary">Login</button>
-                                                    </div>
+
+                                                    <div class="d-grid"><button class="btn btn-primary btn-block">Login
+                                                        </button></div>
                                                 </form:form>
                                             </div>
                                             <div class="card-footer text-center py-3">
