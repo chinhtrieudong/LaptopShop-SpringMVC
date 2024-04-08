@@ -79,7 +79,7 @@ public class UserController {
         // }
 
         if (newUserbindingResult.hasErrors()) {
-            return "/admin/user/create";
+            return "admin/user/create";
         }
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(hoidanit.getPassword());
@@ -95,7 +95,7 @@ public class UserController {
     public String getUpdateUserPage(Model model, @PathVariable long id) {
         User curUser = this.userService.getUserById(id);
         model.addAttribute("newUser", curUser);
-        return "/admin/user/update";
+        return "admin/user/update";
     }
 
     // Update user
@@ -122,7 +122,7 @@ public class UserController {
         User user = new User();
         user.setId(id);
         model.addAttribute("newUser", user);
-        return "/admin/user/delete";
+        return "admin/user/delete";
     }
 
     // Remove user

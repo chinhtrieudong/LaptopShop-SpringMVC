@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class OrderController {
     @GetMapping("/admin/order")
     public String getOrder() {
-        return "/admin/order/show";
+        return "admin/order/show";
     }
 
 }

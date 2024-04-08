@@ -36,13 +36,13 @@ public class ProductController {
     public String getProductPage(Model model) {
         List<Product> prs = this.productService.fetchProducts();
         model.addAttribute("products", prs);
-        return "/admin/product/show";
+        return "admin/product/show";
     }
 
     @GetMapping("/admin/product/create")
     public String getCreateProductPage(Model model) {
         model.addAttribute("newProduct", new Product());
-        return "/admin/product/create";
+        return "admin/product/create";
     }
 
     @PostMapping("/admin/product/create")
@@ -55,7 +55,7 @@ public class ProductController {
         }
 
         if (newProductbindingResult.hasErrors()) {
-            return "/admin/product/create";
+            return "admin/product/create";
         }
 
         String image = this.uploadService.handleSaveUploadFile(file, "product");
@@ -68,14 +68,14 @@ public class ProductController {
     public String getDetailProductPage(Model model, @PathVariable long id) {
         Product hoidanit = this.productService.fetchProductById(id).get();
         model.addAttribute("productInfo", hoidanit);
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     @GetMapping("/admin/product/delete/{id}")
     public String getDeleteProductPage(Model model, @PathVariable long id) {
         Product delProduct = this.productService.fetchProductById(id).get();
         model.addAttribute("delProduct", delProduct);
-        return "/admin/product/delete";
+        return "admin/product/delete";
     }
 
     @PostMapping("/admin/product/delete")
@@ -88,7 +88,7 @@ public class ProductController {
     public String getUpdateProductPage(Model model, @PathVariable long id) {
         Optional<Product> currentProduct = this.productService.fetchProductById(id);
         model.addAttribute("newProduct", currentProduct.get());
-        return "/admin/product/update";
+        return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")
