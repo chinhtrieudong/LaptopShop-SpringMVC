@@ -15,10 +15,9 @@
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
 
-            <body class="bg-primary">
+            <body class="bg-primary" style="background-image: url('/images/loginBg.png'); background-size: contain;">
                 <div id="layoutAuthentication">
                     <div id="layoutAuthentication_content">
-
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-5">
@@ -30,6 +29,10 @@
                                             <form method="post" action="/login">
                                                 <c:if test="${param.error != null}">
                                                     <div class="my-2" style="color: red;">Invalid email or password.
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${param.logout != null}">
+                                                    <div class="my-2" style="color: green;">Logout success
                                                     </div>
                                                 </c:if>
                                                 <div class="form-floating mb-3">
