@@ -81,6 +81,6 @@ public class HomePageController {
 
     @GetMapping("/accessDenied")
     public String getAccessDeniedPage() {
-        return "client/auth/403";
+        return "client/auth/deny";
     }
 }

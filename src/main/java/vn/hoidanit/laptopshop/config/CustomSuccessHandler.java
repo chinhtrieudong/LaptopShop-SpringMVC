@@ -51,6 +51,11 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
         String targetUrl = determineTargetUrl(authentication);
 
+        // Handle exception
+        if (response.isCommitted()) {
+            return;
+        }
+
         redirectStrategy.sendRedirect(request, response, targetUrl);
         clearAuthenticationAttributes(request);
     }
