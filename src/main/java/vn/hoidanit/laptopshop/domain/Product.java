@@ -1,10 +1,13 @@
 package vn.hoidanit.laptopshop.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
@@ -31,6 +34,9 @@ public class Product {
     private long sold;
     private String factory;
     private String target;
+
+    @OneToMany(mappedBy = "product")
+    List<CartDetail> cartDetails;
 
     public Product() {
     }

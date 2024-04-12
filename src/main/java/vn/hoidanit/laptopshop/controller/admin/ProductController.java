@@ -49,11 +49,10 @@ public class ProductController {
     public String postCreateProduct(@ModelAttribute("newProduct") @Valid Product pr,
             BindingResult newProductbindingResult,
             @RequestParam("hoidanitFile") MultipartFile file) {
-        List<FieldError> errors = newProductbindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(error.getField() + " - " + error.getDefaultMessage());
-        }
-
+        // List<FieldError> errors = newProductbindingResult.getFieldErrors();
+        // for (FieldError error : errors) {
+        // System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        // }
         if (newProductbindingResult.hasErrors()) {
             return "admin/product/create";
         }

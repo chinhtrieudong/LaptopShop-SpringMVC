@@ -19,6 +19,7 @@ public class UserService {
             RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+
     }
 
     public List<User> getAllUsers() {
@@ -62,4 +63,5 @@ public class UserService {
     public User getUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
+
 }
