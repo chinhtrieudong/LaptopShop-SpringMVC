@@ -17,7 +17,6 @@ import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.ProductService;
-import vn.hoidanit.laptopshop.service.UserService;
 
 @Controller
 public class itemController {
@@ -67,4 +66,13 @@ public class itemController {
 
         return "client/cart/show";
     }
+
+    @PostMapping("/delete-cart-product/{id}")
+    public String handleRemoveFromCart(@PathVariable long id, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        long cartDetailId = id;
+        this.productService.handleRemoveCartDetail(cartDetailId, session);
+        return "redirect:/cart";
+    }
+
 }
