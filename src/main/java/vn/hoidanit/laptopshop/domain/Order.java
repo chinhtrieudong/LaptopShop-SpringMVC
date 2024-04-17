@@ -32,6 +32,9 @@ public class Order {
     @OneToMany(mappedBy = "order")
     List<OrderDetail> orderDetails;
 
+    public Order() {
+    }
+
     public Order(long id, double totalPrice) {
         this.id = id;
         this.totalPrice = totalPrice;
