@@ -138,41 +138,48 @@ public class ProductService {
 
     public void handlePlaceOrder(User user, HttpSession session,
             String receiverName, String receiverAddress, String receiverPhone) {
-
-        Order curOrder = new Order();
-        curOrder.setUser(user);
-        curOrder.setReceiverAddress(receiverAddress);
-        curOrder.setReceiverName(receiverName);
-        curOrder.setReceiverPhone(receiverPhone);
-
+        // get cart by user
         Cart cart = this.cartRepository.findByUser(user);
         if (cart != null) {
             List<CartDetail> cartDetails = cart.getCartDetails();
-            double totalPrice = 0;
-            for (CartDetail cd : cartDetails) {
-                totalPrice += cd.getPrice() * cd.getQuantity();
+
+            if (cartDetails != null) {
+
+                // create order
+                Order curOrder = new Order();
+                curOrder.setUser(user);
+                curOrder.setReceiverName(receiverName);
+                curOrder.setReceiverAddress(receiverAddress);
+                curOrder.setReceiverPhone(receiverPhone);
+                curOrder.setStatus("PENDING");
+
+                double totalPrice = 0;
+                for (CartDetail cd : cartDetails) {
+                    totalPrice += cd.getPrice() * cd.getQuantity();
+                }
+
                 curOrder.setTotalPrice(totalPrice);
+                Order order = this.orderRepository.save(curOrder);
+
+                // create orderDetail
+                for (CartDetail cd : cartDetails) {
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.setOrder(order);
+                    orderDetail.setProduct(cd.getProduct());
+                    orderDetail.setPrice(cd.getPrice());
+                    orderDetail.setQuantity(cd.getQuantity());
+                    this.orderDetailRepository.save(orderDetail);
+                }
+
+                // xóa cart & cartDetail
+                for (CartDetail cd : cartDetails) {
+                    this.cardDetailRepository.deleteById(cd.getId());
+                }
+                this.cartRepository.deleteById(cart.getId());
+
+                // update session
+                session.setAttribute("sum", 0);
             }
-
-            Order order = this.orderRepository.save(curOrder);
-            for (CartDetail cd : cartDetails) {
-                OrderDetail orderDetail = new OrderDetail();
-                orderDetail.setOrder(order);
-                orderDetail.setProduct(cd.getProduct());
-                orderDetail.setPrice(cd.getPrice());
-                orderDetail.setQuantity(cd.getQuantity());
-                this.orderDetailRepository.save(orderDetail);
-            }
-
-            // xóa cart & cartDetail
-            for (CartDetail cd : cartDetails) {
-                this.cardDetailRepository.deleteById(cd.getId());
-            }
-            this.cartRepository.deleteById(cart.getId());
-
-            // update session
-            session.setAttribute("sum", 0);
-
         }
     }
 }

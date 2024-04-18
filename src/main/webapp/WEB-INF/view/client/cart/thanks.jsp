@@ -32,15 +32,19 @@
     </head>
 
     <body>
-        <div class="d-flex h-100 w-100 justify-content-center align-items-center flex-column ">
+        <jsp:include page="../layout/header.jsp" />
+        <div class="container" style="margin-top: 100px;">
+            <div class="row">
+                <div class="col-12 mt-5 ">
 
-            <h1 class="" style="font-size: 8.5rem;">Thank You!</h1>
+                </div>
+                <div class="alert alert-success">
+                    Cảm ơn bạn đã đặt hàng. Đơn hàng đã được xác nhận thành công.
+                </div>
+            </div>
 
-            <p class="lead">
-                <a class="btn btn-primary btn-lg mt-3 " href="/">Continue to
-                    homepage</a>
-            </p>
         </div>
+        <jsp:include page="../layout/feature.jsp" />
     </body>
 
     </html>

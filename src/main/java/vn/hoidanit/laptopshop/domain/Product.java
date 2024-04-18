@@ -36,7 +36,7 @@ public class Product {
     private String target;
 
     @OneToMany(mappedBy = "product")
-    List<CartDetail> cartDetails;
+    private List<CartDetail> cartDetails;
 
     public Product() {
     }
