@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import vn.hoidanit.laptopshop.domain.Order;
 import vn.hoidanit.laptopshop.domain.OrderDetail;
+import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.repository.OrderDetailRepository;
 import vn.hoidanit.laptopshop.repository.OrderRepository;
 
@@ -22,6 +23,10 @@ public class OrderService {
 
     public List<Order> fetchAll() {
         return this.orderRepository.findAll();
+    }
+
+    public List<Order> fetchByUser(User user) {
+        return this.orderRepository.findByUser(user);
     }
 
     public Optional<Order> fetchById(long id) {

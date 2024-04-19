@@ -1,18 +1,25 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import vn.hoidanit.laptopshop.service.UserService;
 
 @Controller
 public class DashBoardController {
+    private final UserService userService;
 
-    @GetMapping("/admin")
-    public String getDashBoard() {
-        return "admin/dashboard/show";
+    public DashBoardController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/admin/show")
-    public String getProduct() {
-        return "admin/product/show";
+    @GetMapping("/admin")
+    public String getDashBoard(Model model) {
+        model.addAttribute("countUsers", this.userService.countUsers());
+        model.addAttribute("countProducts", this.userService.countProducts());
+        model.addAttribute("countOrders", this.userService.countOrder());
+
+        return "admin/dashboard/show";
     }
 }

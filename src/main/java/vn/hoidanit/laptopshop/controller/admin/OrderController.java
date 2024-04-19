@@ -62,9 +62,7 @@ public class OrderController {
 
     @PostMapping("/admin/order/delete")
     public String handleOrderDelete(@ModelAttribute("delOrder") Order delOrder) {
-
         this.orderService.handleDeleteOrderById(delOrder.getId());
-
         return "redirect:/admin/order";
     }
 

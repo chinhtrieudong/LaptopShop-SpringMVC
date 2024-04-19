@@ -65,6 +65,7 @@ public class ProductController {
     @GetMapping("/admin/product/{id}")
     public String getDetailProductPage(Model model, @PathVariable long id) {
         Product hoidanit = this.productService.fetchProductById(id).get();
+        model.addAttribute("id", id);
         model.addAttribute("productInfo", hoidanit);
         return "admin/product/detail";
     }
