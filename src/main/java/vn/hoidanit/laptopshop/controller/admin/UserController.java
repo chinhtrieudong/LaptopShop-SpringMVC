@@ -3,7 +3,11 @@ package vn.hoidanit.laptopshop.controller.admin;
 import org.springframework.ui.Model;
 import vn.hoidanit.laptopshop.domain.User;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
@@ -44,9 +48,21 @@ public class UserController {
 
     // Get all user
     @RequestMapping("/admin/user")
-    public String getUserPage(Model model) {
-        List<User> users = this.userService.getAllUsers();
-        model.addAttribute("users", users);
+    public String getUserPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 2);
+        Page<User> users = this.userService.fetchAllUsers(pageable);
+        List<User> listUser = users.getContent();
+        model.addAttribute("users", listUser);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", users.getTotalPages());
         return "admin/user/show";
     }
 
@@ -54,7 +70,7 @@ public class UserController {
     @RequestMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable long id) {
         model.addAttribute("newUser", new User());
-        User userInfo = this.userService.getUserById(id);
+        User userInfo = this.userService.fetchUserById(id);
         model.addAttribute("userInfo", userInfo);
         return "admin/user/detail";
     }
@@ -84,7 +100,7 @@ public class UserController {
         String hashPassword = this.passwordEncoder.encode(hoidanit.getPassword());
         hoidanit.setAvatar(avatar);
         hoidanit.setPassword(hashPassword);
-        hoidanit.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
+        hoidanit.setRole(this.userService.fetchRoleByName(hoidanit.getRole().getName()));
         this.userService.handleSaveUser(hoidanit);
         return "redirect:/admin/user";
     }
@@ -92,7 +108,7 @@ public class UserController {
     // Update user page
     @RequestMapping("/admin/user/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable long id) {
-        User curUser = this.userService.getUserById(id);
+        User curUser = this.userService.fetchUserById(id);
         model.addAttribute("newUser", curUser);
         return "admin/user/update";
     }
@@ -101,14 +117,14 @@ public class UserController {
     @PostMapping("/admin/user/update")
     public String postUpdateUser(Model model, @ModelAttribute("newUser") User hoidanit,
             @RequestParam("hoidanitFile") MultipartFile file) {
-        User curUser = this.userService.getUserById(hoidanit.getId());
+        User curUser = this.userService.fetchUserById(hoidanit.getId());
 
         if (curUser != null) {
             curUser.setFullName(hoidanit.getFullName());
             curUser.setPhone(hoidanit.getPhone());
             curUser.setAddress(hoidanit.getAddress());
             curUser.setAvatar(this.uploadService.handleSaveUploadFile(file, "avatar"));
-            curUser.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
+            curUser.setRole(this.userService.fetchRoleByName(hoidanit.getRole().getName()));
             this.userService.handleSaveUser(curUser);
         }
         return "redirect:/admin/user";

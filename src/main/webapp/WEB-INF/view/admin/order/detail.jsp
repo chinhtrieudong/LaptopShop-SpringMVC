@@ -33,7 +33,7 @@
                                     <div class="mt-5">
                                         <div class="row ml-0">
                                             <div class="d-flex justify-content-between mt-5 mb-3 ">
-                                                <h3>Order detail with id = ${orderInfo.id}</h3>
+                                                <h3>Order detail with id = ${id}</h3>
                                             </div>
                                             <hr>
 

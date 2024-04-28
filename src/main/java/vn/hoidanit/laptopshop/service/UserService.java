@@ -2,6 +2,8 @@ package vn.hoidanit.laptopshop.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.hoidanit.laptopshop.domain.Role;
@@ -28,11 +30,11 @@ public class UserService {
 
     }
 
-    public List<User> getAllUsers() {
-        return this.userRepository.findAll();
+    public Page<User> fetchAllUsers(Pageable page) {
+        return this.userRepository.findAll(page);
     }
 
-    public List<User> getAllUsersByEmail(String email) {
+    public List<User> fetchAllUsersByEmail(String email) {
         return this.userRepository.findOneByEmail(email);
     }
 
@@ -42,7 +44,7 @@ public class UserService {
         return eric;
     }
 
-    public User getUserById(long id) {
+    public User fetchUserById(long id) {
         return this.userRepository.findById(id);
     }
 
@@ -50,7 +52,7 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
-    public Role getRoleByName(String name) {
+    public Role fetchRoleByName(String name) {
         return this.roleRepository.findByName(name);
     }
 

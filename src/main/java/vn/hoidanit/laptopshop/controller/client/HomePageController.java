@@ -73,7 +73,7 @@ public class HomePageController {
         User user = this.userService.registerDTOtoUser(registerDTO);
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
         user.setPassword(hashPassword);
-        user.setRole(this.userService.getRoleByName("USER"));
+        user.setRole(this.userService.fetchRoleByName("USER"));
         // save
         this.userService.handleSaveUser(user);
         return "redirect:/login";

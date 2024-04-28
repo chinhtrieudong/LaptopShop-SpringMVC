@@ -35,7 +35,16 @@ public class ProductController {
     }
 
     @GetMapping("/admin/product")
-    public String getProductPage(Model model, @RequestParam("page") int page) {
+    public String getProductPage(Model model,
+            @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
         Pageable pageable = PageRequest.of(page - 1, 2);
         Page<Product> prs = this.productService.fetchProducts(pageable);
         List<Product> listProduct = prs.getContent();
@@ -126,6 +135,26 @@ public class ProductController {
             this.productService.handleSaveProduct(curProduct);
         }
         return "redirect:/admin/product";
+    }
+
+    @GetMapping("/products")
+    public String getProductsPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<Product> prs = this.productService.fetchProducts(pageable);
+        List<Product> listProduct = prs.getContent();
+        model.addAttribute("totalPages", prs.getTotalPages());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("products", listProduct);
+
+        return "client/product/products";
     }
 
 }
