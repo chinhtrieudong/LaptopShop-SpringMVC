@@ -4,7 +4,11 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +22,8 @@ import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.service.ProductService;
+import vn.hoidanit.laptopshop.service.specification.ProductSpecs;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -26,7 +32,6 @@ public class itemController {
 
     public itemController(ProductService productService) {
         this.productService = productService;
-
     }
 
     @GetMapping("/product/{id}")
@@ -140,4 +145,27 @@ public class itemController {
         return "redirect:/add-product-from-view-detail";
     }
 
+    @GetMapping("/products")
+    public String getProductsPage(Model model, @RequestParam("page") Optional<String> pageOptional,
+            @RequestParam("name") Optional<String> nameOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        Pageable pageable = PageRequest.of(page - 1, 5);
+
+        String name = nameOptional.isPresent() ? nameOptional.get() : "";
+        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, name);
+        List<Product> listProduct = prs.getContent();
+        model.addAttribute("totalPages", prs.getTotalPages());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("products", listProduct);
+
+        return "client/product/products";
+    }
 }
