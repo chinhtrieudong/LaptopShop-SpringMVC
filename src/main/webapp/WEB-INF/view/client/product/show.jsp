@@ -147,81 +147,69 @@
                             </div>
 
                             <div class="col-12 col-md-8 text-center">
-                                <div class="tab-content">
-                                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                                        <div class="row g-4">
-                                            <div class="col-lg-12">
-                                                <div class="row g-4">
-                                                    <c:forEach var="product" items="${products}">
-                                                        <div class="col-md-6 col-lg-4 col-xl-4">
-                                                            <div class="rounded position-relative fruite-item">
-                                                                <div class="fruite-img">
-                                                                    <img src="/images/product/${product.image}"
-                                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                                </div>
-                                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                                    style="top: 10px; left: 10px;">Laptop</div>
-                                                                <div
-                                                                    class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                                    <h4 style="font-size: 15px;">
-                                                                        <a
-                                                                            href="/product/${product.id}">${product.name}</a>
-                                                                    </h4>
-                                                                    <p style="font-size: 13px;">${product.shortDesc}</p>
-                                                                    <div
-                                                                        class="d-flex flex-lg-wrap justify-content-center ">
-                                                                        <p style="font-size: 15px;text-align: center; width: 100%"
-                                                                            class="text-dark fs-5 fw-bold mb-0">
-                                                                            <fmt:formatNumber type="number"
-                                                                                value=" ${product.price}" /> đ
-                                                                        </p>
-                                                                        <form method="post"
-                                                                            action="/add-product-to-cart/${product.id}">
-                                                                            <input type="hidden"
-                                                                                name="${_csrf.parameterName}"
-                                                                                value="${_csrf.token}" />
-                                                                            <button
-                                                                                class="mx-auto border border-secondary rounded-pill px-3 text-primary"><i
-                                                                                    class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                                Add to cart</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </c:forEach>
+                                <div class="row g-4">
+                                    <c:if test="${totalPages == 0}">Không tìm thấy sản phẩm</c:if>
+                                    <c:forEach var="product" items="${products}">
+                                        <div class="col-md-6 col-lg-4 col-xl-4">
+                                            <div class="rounded position-relative fruite-item">
+                                                <div class="fruite-img">
+                                                    <img src="/images/product/${product.image}"
+                                                        class="img-fluid w-100 rounded-top" alt="">
+                                                </div>
+                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                    style="top: 10px; left: 10px;">Laptop</div>
+                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                    <h4 style="font-size: 15px;">
+                                                        <a href="/product/${product.id}">${product.name}</a>
+                                                    </h4>
+                                                    <p style="font-size: 13px;">${product.shortDesc}</p>
+                                                    <div class="d-flex flex-lg-wrap justify-content-center ">
+                                                        <p style="font-size: 15px;text-align: center; width: 100%"
+                                                            class="text-dark fs-5 fw-bold mb-0">
+                                                            <fmt:formatNumber type="number" value=" ${product.price}" />
+                                                            đ
+                                                        </p>
+                                                        <form method="post" action="/add-product-to-cart/${product.id}">
+                                                            <input type="hidden" name="${_csrf.parameterName}"
+                                                                value="${_csrf.token}" />
+                                                            <button
+                                                                class="mx-auto border border-secondary rounded-pill px-3 text-primary"><i
+                                                                    class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                                Add to cart</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mt-2">
-                                            <nav aria-label="Page navigation example">
-                                                <ul class="pagination d-flex gap-1 justify-content-center">
-                                                    <li class="page-item">
-                                                        <a class="${1 eq currentPage ? 'disabled page-link rounded' : 'page-link rounded'}"
-                                                            href="/products?page=${currentPage - 1}"
-                                                            aria-label="Previous">
-                                                            <span aria-hidden="true">&laquo;</span>
-                                                        </a>
-                                                    </li>
-                                                    <c:forEach begin="1" end="${totalPages}" varStatus="loop">
-                                                        <li class="page-item"><a class="page-link rounded"
-                                                                href="/products?page=${loop.index}">${loop.index}</a>
-                                                        </li>
-                                                    </c:forEach>
-                                                    <li class="page-item">
-                                                        <a class="${totalPages eq currentPage ? 'disabled page-link rounded' : 'page-link rounded'}"
-                                                            href="/products?page=${currentPage + 1}" aria-label="Next">
-                                                            <span aria-hidden="true">&raquo;</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
+                            <c:if test="${totalPages > 0}">
+                                <div class="pagination d-flex gap-1 justify-content-center">
+                                    <li class="page-item">
+                                        <a class="${1 eq currentPage ? 'disabled page-link rounded' : 'page-link rounded'}"
+                                            href="/products?page=${currentPage - 1}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <c:forEach begin="1" end="${totalPages}" varStatus="loop">
+                                        <li class="page-item"><a class="page-link rounded"
+                                                href="/products?page=${loop.index}">${loop.index}</a>
+                                        </li>
+                                    </c:forEach>
+                                    <li class="page-item">
+                                        <a class="${totalPages eq currentPage ? 'disabled page-link rounded' : 'page-link rounded'}"
+                                            href="/products?page=${currentPage + 1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
+                </div>
+                </div>
+                </div>
                 </div>
 
 

@@ -159,36 +159,14 @@ public class itemController {
 
         Pageable pageable = PageRequest.of(page - 1, 60);
 
-        Page<Product> prs = this.productService.fetchProducts(pageable);
+        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, productCriteriaDTO);
 
-        // double min = minOptional.isPresent() ?
-        // Double.parseDouble(minOptional.get()) : 0;
-        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-        // min);
+        List<Product> listProduct = prs.getContent().size() > 0 ? prs.getContent() : new ArrayList<Product>();
 
-        // double max = maxOptional.isPresent() ?
-        // Double.parseDouble(maxOptional.get()) : 0;
-        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-        // max);
-
-        // String factory = factoryOptional.isPresent() ? factoryOptional.get() : "";
-        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-        // factory);
-
-        // List<String> factories = Arrays.asList(factoryOptional.get().split(","));
-        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-        // factories);
-
-        // List<String> price = Arrays.asList(priceOptional.get().split(","));
-        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-        // price);
-
-        List<Product> listProduct = prs.getContent();
-
-        model.addAttribute("totalPages", prs.getTotalPages());
         model.addAttribute("currentPage", page);
         model.addAttribute("products", listProduct);
+        model.addAttribute("totalPages", prs.getTotalPages());
 
-        return "client/product/products";
+        return "client/product/show";
     }
 }
