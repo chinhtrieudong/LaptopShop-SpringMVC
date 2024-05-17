@@ -19,7 +19,15 @@
                     <link href="/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
                     <link href="/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
                     <link href="/client/css/bootstrap.min.css" rel="stylesheet">
+
                     <link href="/client/css/style.css" rel="stylesheet">
+                    <style>
+                        .page-link.disabled {
+                            color: var(--bs-pagination-disabled-color);
+                            pointer-events: none;
+                            background-color: var(--bs-pagination-disabled-color);
+                        }
+                    </style>
 
                 </head>
 
